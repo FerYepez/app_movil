@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "653032850692",
+    "project_id": "apss-62867",
+    "storage_bucket": "apss-62867.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:653032850692:android:e66d1acd4542b59fb4fc51",
+        "android_client_info": {
+          "package_name": "com.universidad.proyecto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "653032850692-vu306ffa9f11es9ts2bbaat30mqm68kb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDscb0MIJkVm2UMq_6plGJj-Kvy5fBHCPU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "653032850692-vu306ffa9f11es9ts2bbaat30mqm68kb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
