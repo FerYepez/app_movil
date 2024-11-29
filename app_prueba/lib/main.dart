@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'screens/menu.dart';
 import 'package:mysql_client/mysql_client.dart';
@@ -23,7 +22,7 @@ class Miapp extends StatelessWidget {
       debugShowCheckedModeBanner: false, // Oculta el banner de "DEBUG"
       home: const MyHomePage(),
       routes: {
-        'Menu': (_) => Menu(),
+        'Menu': (_) => const Menu(),
       },
     );
   }
@@ -70,18 +69,18 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFEADC4D),
+      backgroundColor: const Color(0xFFEADC4D),
       body: SafeArea(
         top: true,
         child: Align(
-          alignment: AlignmentDirectional(0, 0),
+          alignment: const AlignmentDirectional(0, 0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 45, 0, 0), //  Padding top de imagen 
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 135, 0, 0), //  Padding top de imagen 
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15.0), // Cambia el valor para ajustar el redondeo
                   child: Image.asset(
@@ -93,27 +92,27 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0, 0),
+                alignment: const AlignmentDirectional(0, 0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 35, 0, 0), //  Padding top del contenedor verde 
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 35, 0, 0), //  Padding top del contenedor verde 
                   child: Container(
                     width: 280,
-                    height: 350,
+                    height: 420,
                     decoration: BoxDecoration(
-                      color: Color(0xFFA9EA4B),
+                      color: const Color(0xFFA9EA4B),
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
                         color: Colors.white,
                         width: 2.0,
                       ),
                     ),
-                    alignment: AlignmentDirectional(0, 0),
+                    alignment: const AlignmentDirectional(0, 0),
                     child: Form(
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Align(
+                        const Align(
                           alignment: AlignmentDirectional(-1, 0),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(30, 30, 30, 10),
@@ -129,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           width: 200,
                           child: TextFormField(
                             controller: usuario,
@@ -144,12 +143,12 @@ class _MyHomePageState extends State<MyHomePage> {
                             },
                             decoration: InputDecoration(
                               isDense: true,
-                              labelStyle: TextStyle(
+                              labelStyle: const TextStyle(
                                 fontFamily: 'Inter',
                                 letterSpacing: 0.0,
                               ),
                               hintText: 'Usuario',
-                              hintStyle: TextStyle(
+                              hintStyle: const TextStyle(
                                 fontFamily: 'Inter',
                                 letterSpacing: 0.0,
                               ),
