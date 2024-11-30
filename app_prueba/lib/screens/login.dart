@@ -1,17 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
-class LoginScreen extends StatelessWidget {
-  final TextEditingController usuario = TextEditingController();
-  final TextEditingController password = TextEditingController();
-
-  // Función para iniciar sesión
-  Future<void> _login(BuildContext context) async {
-    try {
-      // ignore: unused_local_variable
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-              email: usuario.text, password: password.text);
+import 'package:app_prueba/assets/auth_services.daril: usuario.text, password: password.text);
 
       // Si el login es exitoso, navega al menú
       Navigator.pushReplacementNamed(context, 'Menu');
@@ -114,6 +101,21 @@ class LoginScreen extends StatelessWidget {
                             onPressed: () => _login(context),
                           ),
                         ),
+                        // Botón de iniciar sesión con google
+                        Padding(
+                            padding:
+                            EdgeInsetsDirectiona.fromSTEB(25, 15, 25, 15),
+                            child: Image.asset(
+                                  width: 50,
+                                  height: 40,
+                                  fit: BoxFit.cover,
+                              )
+                            //child: Text(
+                              //'Iniciar con Google',
+                              //style: TextStyle(color: Colors.white),
+                            //),
+                            onPressed: () => AuthService().sigInWithGoogle,
+                        
                       ],
                     ),
                   ),
@@ -126,3 +128,18 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+t';
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+class LoginScreen extends StatelessWidget {
+  final TextEditingController usuario = TextEditingController();
+  final TextEditingController password = TextEditingController();
+
+  // Función para iniciar sesión
+  Future<void> _login(BuildContext context) async {
+    try {
+      // ignore: unused_local_variable  
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              ema
