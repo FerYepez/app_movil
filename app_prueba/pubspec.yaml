@@ -42,6 +42,9 @@ dependencies:
   google_sign_in: ^6.2.2
   carousel_slider: ^5.0.0
   backdrop: ^0.9.1
+  
+
+  googleapis: ^11.0.2 #Para traducir las recetas de ingres a español
 
 dev_dependencies:
   flutter_test:
