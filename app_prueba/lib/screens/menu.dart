@@ -85,22 +85,6 @@ class _MenuState extends State<Menu> {
                   0, 50, 0, 0), // Padding alrededor del ListTile
               child: ListTile(
                 title: const Text(
-                  'Dieta vegetariana',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF02542D),
-                  ),
-                ),
-                onTap: () {},
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(
-                  0, 50, 0, 0), // Padding alrededor del ListTile
-              child: ListTile(
-                title: const Text(
                   'Dieta keto',
                   textAlign: TextAlign.center,
                   style: TextStyle(

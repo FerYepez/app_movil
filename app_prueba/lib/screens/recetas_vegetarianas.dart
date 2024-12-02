@@ -44,8 +44,7 @@ class _RecipeGridState extends State<RecipeGrid> {
   }
 
   Future<void> fetchRecipes() async {
-    const apiUrl =
-        'https://www.themealdb.com/api/json/v1/1/filter.php?c=Vegetarian';
+    const apiUrl = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=Vegan';
     try {
       final response = await http.get(Uri.parse(apiUrl));
       if (response.statusCode == 200) {
