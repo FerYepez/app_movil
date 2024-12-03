@@ -131,10 +131,11 @@ class _ResultScreenState extends State<ResultScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Resultado IMC"),
-        backgroundColor: Colors.green, // Cambiar el color a verde
+        backgroundColor: Color(0xFFA9EA4B), // Cambiar el color a verde
         actions: [
           IconButton(
-            icon: Icon(Icons.favorite_border), // Icono de "favoritos"
+            //icon: Icon(Icons.favorite_border), // Icono de "favoritos"
+            icon: Icon(Icons.bookmark_border), //Icono de guardar
             onPressed:
                 navigateToSavedScreen, // Navegar a la pantalla de IMCs guardados
           ),
@@ -171,7 +172,7 @@ class _ResultScreenState extends State<ResultScreen> {
                         margin: EdgeInsets.only(top: 8),
                         padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: Colors.yellow,
+                          color: Color(0xFFEADC4D),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
@@ -224,7 +225,7 @@ class _ResultScreenState extends State<ResultScreen> {
                       32), // Espacio adicional para asegurar que el texto esté al menos dos líneas más abajo
               Container(
                 width: double.infinity, // Abarcar todo el ancho de la pantalla
-                color: Colors.yellow,
+                color: Color(0xFFEADC4D),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(

@@ -13,13 +13,20 @@ class RecipeApp extends StatelessWidget {
     return MaterialApp(
       title: 'Recipe App',
       theme: ThemeData(primarySwatch: Colors.teal),
-      home: const RecipeGrid(),
     );
   }
 }
 
+// Clase RecipeGrid
 class RecipeGrid extends StatefulWidget {
-  const RecipeGrid({super.key});
+  final String category;
+  final String categoryTitle;
+
+  const RecipeGrid({
+    super.key,
+    required this.category,
+    required this.categoryTitle, // Asegúrate de pasar este parámetro
+  });
 
   @override
   _RecipeGridState createState() => _RecipeGridState();
@@ -30,23 +37,23 @@ class _RecipeGridState extends State<RecipeGrid> {
   List<dynamic> favoriteRecipes = [];
   bool isLoading = true;
 
-  final Map<String, String> translationMap = {
+  /*  final Map<String, String> translationMap = {
     'Spaghetti': 'Espaguetis',
     'Salad': 'Ensalada',
     'Pizza': 'Pizza',
     // Agrega más traducciones si es necesario
   };
-
+ */
   @override
   void initState() {
     super.initState();
-    fetchRecipes();
+    fetchRecipes(widget.category);
   }
 
-  Future<void> fetchRecipes() async {
-    const apiUrl = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=Vegan';
+  Future<void> fetchRecipes(String category) async {
+    const apiUrl = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
     try {
-      final response = await http.get(Uri.parse(apiUrl));
+      final response = await http.get(Uri.parse(apiUrl + category));
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         setState(() {
@@ -54,7 +61,7 @@ class _RecipeGridState extends State<RecipeGrid> {
           isLoading = false;
         });
       } else {
-        throw Exception('Error al cargar las recetas');
+        throw Exception('Error al cargar las recetas: ${response.statusCode}');
       }
     } catch (e) {
       setState(() {
@@ -136,8 +143,8 @@ class _RecipeGridState extends State<RecipeGrid> {
                   final recipe = recipes[index];
                   final isFavorite = favoriteRecipes.contains(recipe);
                   final translatedTitle =
-                      translationMap[recipe['strMeal']] ?? recipe['strMeal'];
-
+                      //translationMap[recipe['strMeal']] ?? recipe['strMeal'];
+                      recipe['strMeal'];
                   return GestureDetector(
                     onTap: () {
                       fetchRecipeDetails(recipe['idMeal'], context);
