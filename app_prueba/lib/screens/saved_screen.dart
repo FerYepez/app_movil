@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'imc_model.dart';
 
 class SavedScreen extends StatelessWidget {
-  final List<Map<String, dynamic>> savedImcs;
-
-  SavedScreen({required this.savedImcs});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,21 +21,25 @@ class SavedScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ListView.builder(
-          itemCount: savedImcs.length,
-          itemBuilder: (context, index) {
-            final imc = savedImcs[index]['imc'];
-            final date = savedImcs[index]['date'];
-            final formattedDate = DateFormat('yyyy-MM-dd').format(date);
+        child: Consumer<IMCModel>(
+          builder: (context, imcModel, child) {
+            return ListView.builder(
+              itemCount: imcModel.savedImcs.length,
+              itemBuilder: (context, index) {
+                final imc = imcModel.savedImcs[index]['imc'];
+                final date = imcModel.savedImcs[index]['date'];
+                final formattedDate = DateFormat('yyyy-MM-dd').format(date);
 
-            return ListTile(
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("IMC: ${imc.toStringAsFixed(1)}"),
-                  Text("Fecha: $formattedDate"),
-                ],
-              ),
+                return ListTile(
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("IMC: ${imc.toStringAsFixed(1)}"),
+                      Text("Fecha: $formattedDate"),
+                    ],
+                  ),
+                );
+              },
             );
           },
         ),
