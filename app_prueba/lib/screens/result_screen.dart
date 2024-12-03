@@ -36,7 +36,10 @@ class _ResultScreenState extends State<ResultScreen> {
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         setState(() {
-          recipes = data['meals'].skip(recipeOffset).take(4).toList(); // Load 4 recipes at a time
+          recipes = data['meals']
+              .skip(recipeOffset)
+              .take(4)
+              .toList(); // Load 4 recipes at a time
           recipeOffset += 4; // Increase the offset for next load
           isLoading = false;
           isLoadingMore = false; // Reset the loading more state
@@ -112,7 +115,7 @@ class _ResultScreenState extends State<ResultScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Resultado IMC"),
-        backgroundColor: Colors.green, // Cambiar el color a verde
+        backgroundColor: Color(0xFFA9EA4B), // Cambiar el color a verde
         actions: [
           IconButton(
             icon: Icon(Icons.favorite_border), // Icono de "favoritos"
@@ -149,13 +152,14 @@ class _ResultScreenState extends State<ResultScreen> {
                     children: [
                       Text(
                         "IMC",
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 8),
                         padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: Colors.yellow,
+                          color: Color(0xFFEADC4D),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
@@ -169,7 +173,8 @@ class _ResultScreenState extends State<ResultScreen> {
                     children: [
                       Text(
                         "Nivel de peso",
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 8),
@@ -189,21 +194,29 @@ class _ResultScreenState extends State<ResultScreen> {
               ),
               SizedBox(height: 20),
               Row(
-                mainAxisAlignment: MainAxisAlignment.end, // Alinear el icono a la derecha
+                mainAxisAlignment:
+                    MainAxisAlignment.end, // Alinear el icono a la derecha
                 children: [
                   IconButton(
                     icon: Icon(Icons.bookmark_border), // Icono de guardar
-                    color: context.watch<IMCModel>().savedImcs.any((imc) => imc['imc'] == widget.imc) ? Colors.red : Colors.black, // Cambia el color si ya está guardado
+                    color: context
+                            .watch<IMCModel>()
+                            .savedImcs
+                            .any((imc) => imc['imc'] == widget.imc)
+                        ? Colors.red
+                        : Colors.black, // Cambia el color si ya está guardado
                     onPressed: () {
                       context.read<IMCModel>().addIMC(widget.imc);
                     }, // Guardar el valor del IMC al presionar el botón
                   ),
                 ],
               ),
-              SizedBox(height: 32), // Espacio adicional para asegurar que el texto esté al menos dos líneas más abajo
+              SizedBox(
+                  height:
+                      32), // Espacio adicional para asegurar que el texto esté al menos dos líneas más abajo
               Container(
                 width: double.infinity, // Abarcar todo el ancho de la pantalla
-                color: Colors.yellow,
+                color: Color(0xFFEADC4D),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -211,7 +224,8 @@ class _ResultScreenState extends State<ResultScreen> {
                     children: [
                       Text(
                         "Recomendaciones:",
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       isLoading
                           ? Center(child: CircularProgressIndicator())
@@ -219,8 +233,10 @@ class _ResultScreenState extends State<ResultScreen> {
                               ? RecipeDetail(
                                   title: selectedRecipeDetails!['title'],
                                   imageUrl: selectedRecipeDetails!['imageUrl'],
-                                  ingredients: selectedRecipeDetails!['ingredients'],
-                                  instructions: selectedRecipeDetails!['instructions'],
+                                  ingredients:
+                                      selectedRecipeDetails!['ingredients'],
+                                  instructions:
+                                      selectedRecipeDetails!['instructions'],
                                   onBackToRecipes: clearSelectedRecipe,
                                 )
                               : Column(
@@ -228,7 +244,8 @@ class _ResultScreenState extends State<ResultScreen> {
                                     GridView.builder(
                                       shrinkWrap: true,
                                       physics: NeverScrollableScrollPhysics(),
-                                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 2,
                                         crossAxisSpacing: 10.0,
                                         mainAxisSpacing: 16.0,
@@ -239,12 +256,14 @@ class _ResultScreenState extends State<ResultScreen> {
                                         final recipe = recipes[index];
                                         return GestureDetector(
                                           onTap: () {
-                                            fetchRecipeDetails(recipe['idMeal']);
+                                            fetchRecipeDetails(
+                                                recipe['idMeal']);
                                           },
                                           child: Card(
                                             clipBehavior: Clip.antiAlias,
                                             child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: <Widget>[
                                                 AspectRatio(
                                                   aspectRatio: 3 / 2,
@@ -254,16 +273,19 @@ class _ResultScreenState extends State<ResultScreen> {
                                                   ),
                                                 ),
                                                 Container(
-                                                  padding: const EdgeInsets.all(8.0),
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
                                                   child: Text(
                                                     recipe['strMeal'],
                                                     style: const TextStyle(
-                                                      fontWeight: FontWeight.bold,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                       fontSize: 16.0,
                                                       color: Colors.black,
                                                     ),
                                                     maxLines: 1,
-                                                    overflow: TextOverflow.ellipsis,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                   ),
                                                 ),
                                               ],
@@ -273,7 +295,8 @@ class _ResultScreenState extends State<ResultScreen> {
                                       },
                                     ),
                                     if (isLoadingMore)
-                                      Center(child: CircularProgressIndicator()),
+                                      Center(
+                                          child: CircularProgressIndicator()),
                                     TextButton(
                                       onPressed: fetchMoreRecipes,
                                       child: Text("Más recetas"),
