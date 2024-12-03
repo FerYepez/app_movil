@@ -2,6 +2,7 @@ import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'recetas_vegetarianas.dart';
+import 'result_screen.dart';
 
 class Menu extends StatefulWidget {
   const Menu({super.key});
@@ -318,6 +319,7 @@ class _MenuState extends State<Menu> {
                             child: SizedBox(
                               width: 250,
                               child: TextField(
+                                controller: heightController,
                                 autofocus: false,
                                 obscureText: false,
                                 decoration: InputDecoration(
@@ -326,7 +328,7 @@ class _MenuState extends State<Menu> {
                                     fontFamily: 'Inter',
                                     letterSpacing: 0.0,
                                   ),
-                                  hintText: 'Altura',
+                                  hintText: 'Altura (cm)',
                                   hintStyle: const TextStyle(
                                     fontFamily: 'Inter',
                                     letterSpacing: 0.0,
@@ -352,6 +354,57 @@ class _MenuState extends State<Menu> {
                                   letterSpacing: 0.0,
                                 ),
                                 textAlign: TextAlign.center,
+                                keyboardType: TextInputType.number,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Align(
+                          alignment: const AlignmentDirectional(1, 0),
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                45, 0, 85, 0),
+                            child: SizedBox(
+                              width: 230,
+                              child: TextField(
+                                controller: weightController,
+                                autofocus: false,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  labelStyle: const TextStyle(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
+                                  hintText: 'Peso (kg)',
+                                  hintStyle: const TextStyle(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  filled: true,
+                                ),
+                                style: const TextStyle(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
+                                textAlign: TextAlign.center,
+                                keyboardType: TextInputType.number,
                               ),
                             ),
                           ),
@@ -417,40 +470,42 @@ class _MenuState extends State<Menu> {
                       Align(
                         alignment: AlignmentDirectional(-1, 0),
                         child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(138, 0, 0, 0),
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    Color(0xFFA9EA4B), // Color de fondo
-                                minimumSize: Size(95,
-                                    40), // Tamaño mínimo del botón (ancho y alto)
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 16), // Padding horizontal
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      8), // Bordes redondeados (ajústalo según lo necesites)
-                                  side: BorderSide(
-                                    color: Color(0xFF02542D),
-                                    width: 2,
-                                  ),
-                                ),
-                              ),
-                              onPressed: () {},
-                              child: Text(
-                                'Calcular',
-                                style: TextStyle(
-                                  fontFamily: 'Open Sans',
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              138, 0, 0, 0),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  Color(0xFFA9EA4B), // Color de fondo
+                              minimumSize: Size(95,
+                                  40), // Tamaño mínimo del botón (ancho y alto)
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 16), // Padding horizontal
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    8), // Bordes redondeados
+                                side: BorderSide(
                                   color: Color(0xFF02542D),
-                                  fontSize: 19,
-                                  letterSpacing: 0.6,
-                                  fontWeight: FontWeight.bold,
+                                  width: 2,
                                 ),
                               ),
-                            )),
+                            ),
+                            onPressed: calculateIMC,
+                            child: Text(
+                              'Calcular',
+                              style: TextStyle(
+                                fontFamily: 'Open Sans',
+                                color: Color(0xFF02542D),
+                                fontSize: 19,
+                                letterSpacing: 0.6,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(25, 0, 0, 0),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(25, 0, 0, 0),
                         child: IconButton(
                           onPressed: () {},
                           icon: Icon(
@@ -462,9 +517,9 @@ class _MenuState extends State<Menu> {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),
