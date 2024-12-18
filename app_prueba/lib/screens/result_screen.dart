@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'saved_screen.dart';
+import 'imc_model.dart';
 import 'recipe_detail.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -14,36 +16,11 @@ class ResultScreen extends StatefulWidget {
 }
 
 class _ResultScreenState extends State<ResultScreen> {
-  List<Map<String, dynamic>> savedImcs = [];
   List<dynamic> recipes = [];
   bool isLoading = true;
   bool isLoadingMore = false;
   int recipeOffset = 0; // Track the offset for loading more recipes
   Map<String, dynamic>? selectedRecipeDetails;
-
-  void saveImc() {
-    setState(() {
-      savedImcs.add({
-        'imc': widget.imc,
-        'date': DateTime.now(),
-      });
-    });
-  }
-
-  void navigateToSavedScreen() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => SavedScreen(savedImcs: savedImcs)),
-    );
-  }
-
-  String getIMCResult() {
-    if (widget.imc < 18.5) return "Bajo peso";
-    if (widget.imc < 25) return "Peso normal";
-    if (widget.imc < 30) return "Sobrepeso";
-    return "Obesidad";
-  }
 
   @override
   void initState() {
@@ -126,17 +103,28 @@ class _ResultScreenState extends State<ResultScreen> {
     });
   }
 
+  String getIMCResult() {
+    if (widget.imc < 18.5) return "Bajo peso";
+    if (widget.imc < 25) return "Peso normal";
+    if (widget.imc < 30) return "Sobrepeso";
+    return "Obesidad";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Resultado IMC"),
-        backgroundColor: Colors.green, // Cambiar el color a verde
+        backgroundColor: Color(0xFFA9EA4B), // Cambiar el color a verde
         actions: [
           IconButton(
             icon: Icon(Icons.favorite_border), // Icono de "favoritos"
-            onPressed:
-                navigateToSavedScreen, // Navegar a la pantalla de IMCs guardados
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SavedScreen()),
+              );
+            }, // Navegar a la pantalla de IMCs guardados
           ),
           IconButton(
             icon: Icon(Icons.login), // Icono de "login"
@@ -171,7 +159,7 @@ class _ResultScreenState extends State<ResultScreen> {
                         margin: EdgeInsets.only(top: 8),
                         padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: Colors.yellow,
+                          color: Color(0xFFEADC4D),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
@@ -211,11 +199,15 @@ class _ResultScreenState extends State<ResultScreen> {
                 children: [
                   IconButton(
                     icon: Icon(Icons.bookmark_border), // Icono de guardar
-                    color: savedImcs.any((imc) => imc['imc'] == widget.imc)
+                    color: context
+                            .watch<IMCModel>()
+                            .savedImcs
+                            .any((imc) => imc['imc'] == widget.imc)
                         ? Colors.red
                         : Colors.black, // Cambia el color si ya está guardado
-                    onPressed:
-                        saveImc, // Guardar el valor del IMC al presionar el botón
+                    onPressed: () {
+                      context.read<IMCModel>().addIMC(widget.imc);
+                    }, // Guardar el valor del IMC al presionar el botón
                   ),
                 ],
               ),
@@ -224,7 +216,7 @@ class _ResultScreenState extends State<ResultScreen> {
                       32), // Espacio adicional para asegurar que el texto esté al menos dos líneas más abajo
               Container(
                 width: double.infinity, // Abarcar todo el ancho de la pantalla
-                color: Colors.yellow,
+                color: Color(0xFFEADC4D),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(

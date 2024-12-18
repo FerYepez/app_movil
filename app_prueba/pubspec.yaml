@@ -37,9 +37,16 @@ dependencies:
   cupertino_icons: ^1.0.8
   mysql_client: ^0.0.27
   http: ^1.2.2
+  firebase_auth: ^5.3.3
+  firebase_core: ^3.8.0 # Asegúrate de usar la última versión compatible
+  google_sign_in: ^6.2.2
   carousel_slider: ^5.0.0
   backdrop: ^0.9.1
+  
+
+#  googleapis: ^11.0.2 #Para traducir las recetas de ingres a español
   intl: ^0.20.1
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:
